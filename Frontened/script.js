@@ -94,3 +94,33 @@ function placeOrder() {
     cart = [];
     updateCart();
 }
+
+// --- BACKEND INTEGRATION --- 
+// Dynamically load products from our new MongoDB + Express Backend
+async function loadProducts() {
+    try {
+        const response = await fetch("http://localhost:5000/api/products");
+        const products = await response.json();
+        
+        const productList = document.getElementById("productList");
+        productList.innerHTML = ""; // Clear any hardcoded products
+        
+        products.forEach(product => {
+            const productHTML = `
+            <div class="product-card" data-name="${product.name.toLowerCase()}">
+                <div class="img">${product.thumbnail || "🎁"}</div>
+                <h3>${product.name}</h3>
+                <p>Category: ${product.category}</p>
+                <p>Stock: ${product.stock > 0 ? "Available" : "Out of Stock"}</p>
+                <p class="price">₹${product.price}</p>
+                <button onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
+            </div>`;
+            productList.innerHTML += productHTML;
+        });
+    } catch (error) {
+        console.error("Error loading products from Database:", error);
+    }
+}
+
+// Call the function as soon as the HTML loads
+document.addEventListener("DOMContentLoaded", loadProducts);

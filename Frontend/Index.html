@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EUPHORA - Festive Products</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="shortcut icon" href="photo-1777221490079-b949ecac1a9e.avif" type="image/x-icon">
+</head>
+<body>
+ 
+<header>
+  <div class="topbar">
+    <div class="logo">EUPHORA</div>
+    <nav>
+      <a href="#home">Home Page</a>
+      <a href="#products">Products</a>
+      <a href="#profile">Profile</a>
+      <a href="#cart">Cart</a>
+ 
+      <div class="login-dropdown" id="loginDropdown">
+        <div class="login-btn" onclick="toggleLoginDropdown()">
+          Login <span class="arrow">▾</span>
+        </div>
+        <div class="dropdown-menu" id="loginMenu">
+          <div class="dropdown-divider">LOGIN AS</div>
+          <a href="#" onclick="openModal('consumer'); return false;">
+            <span class="icon"></span>
+            <span>
+              <span class="label">Consumer</span>
+              <span class="sub">Shop festive products</span>
+            </span>
+          </a>
+          <a href="#" onclick="openModal('seller'); return false;">
+            <span class="icon"></span>
+            <span>
+              <span class="label">Seller</span>
+              <span class="sub">Manage your store</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+ 
+<!-- Consumer Modal -->
+<div class="modal-overlay" id="consumerModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('consumerModal')">✕</button>
+    <span class="modal-badge"> CONSUMER</span>
+    <h2>Welcome Back!</h2>
+    <p class="modal-sub">Login to shop festive products across India</p>
+    <label>EMAIL / PHONE</label>
+    <input type="email" placeholder="email@example.com" />
+    <label>PASSWORD</label>
+    <input type="password" placeholder="Enter your password" />
+    <button class="modal-submit" onclick="handleLogin('Consumer')">LOGIN →</button>
+    <div class="modal-footer">
+      New here? <a onclick="alert('Redirecting to registration...')">Create account</a>
+    </div>
+  </div>
+</div>
+ 
+<!-- Seller Modal -->
+<div class="modal-overlay" id="sellerModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('sellerModal')">✕</button>
+    <span class="modal-badge"> SELLER</span>
+    <h2>Seller Portal</h2>
+    <p class="modal-sub">Manage your store, products & orders</p>
+    <label>SELLER ID / EMAIL</label>
+    <input type="email" placeholder="seller@store.com" />
+    <label>PASSWORD</label>
+    <input type="password" placeholder="Enter your password" />
+    <button class="modal-submit" onclick="handleLogin('Seller')">LOGIN →</button>
+    <div class="modal-footer">
+      New seller? <a onclick="alert('Redirecting to seller registration...')">Register your store</a>
+    </div>
+  </div>
+</div>
+ 
+<section class="hero" id="home">
+  <div class="hero-top">
+    <button class="chat-btn" onclick="toggleChat()"> Chat Bot</button>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search festive products..." />
+      <button onclick="searchProducts()">Search</button>
+    </div>
+  </div>
+  <div class="hero-center">
+    <h1>EUPHORA</h1>
+    <p>Festive shopping for every celebration</p>
+    <span class="hero-tag">✦ India's Favourite Festive Store ✦</span>
+  </div>
+  <div class="offers">
+    <div class="offer-card">
+      <div class="offer-icon"></div>
+      <h3>Diwali Offer</h3>
+      <p>Special decorative items and gift packs.</p>
+      <button>View Offer</button>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon"></div>
+      <h3>Holi Offer</h3>
+      <p>Traditional colours, sweets, and festive combos.</p>
+      <button>View Offer</button>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon"></div>
+      <h3>Raksha Bandhan</h3>
+      <p>Rakhi sets, sweets, and return gifts.</p>
+      <button>View Offer</button>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon"></div>
+      <h3>Navratri Sale</h3>
+      <p>Puja items and festive home decorations.</p>
+      <button>View Offer</button>
+    </div>
+  </div>
+</section>
+ 
+<div class="chat-panel" id="chatPanel">
+  <h2>💬 Festival Assistant</h2>
+  <div class="chat-messages" id="chatMessages">
+    <div class="msg"><strong>Bot:</strong> Hello! Welcome to Utsav. Ask me about festive products.</div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chatInput" placeholder="Type your message..." onkeydown="if(event.key==='Enter') sendMessage()"/>
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+ 
+<section class="section" id="products">
+  <div class="section-head">
+    <h2>Featured Products</h2>
+    <span class="mini-note">✦ Handpicked for every festival</span>
+  </div>
+  <div class="products" id="productList">
+    <div class="product-card" data-name="diya set">
+      <div class="img"></div>
+      <h3>Diya Set</h3>
+      <p>Category: Diwali Decor</p>
+      <p>Stock: Available</p>
+      <p class="price">₹199</p>
+      <button onclick="addToCart('Diya Set', 199)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="rangoli colors">
+      <div class="img"></div>
+      <h3>Rangoli Colors</h3>
+      <p>Category: Festival Decoration</p>
+      <p>Stock: Available</p>
+      <p class="price">₹149</p>
+      <button onclick="addToCart('Rangoli Colors', 149)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="rakhi gift box">
+      <div class="img"></div>
+      <h3>Rakhi Gift Box</h3>
+      <p>Category: Raksha Bandhan</p>
+      <p>Stock: Available</p>
+      <p class="price">₹299</p>
+      <button onclick="addToCart('Rakhi Gift Box', 299)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="puja thali">
+      <div class="img"></div>
+      <h3>Puja Thali</h3>
+      <p>Category: Puja Essentials</p>
+      <p>Stock: Available</p>
+      <p class="price">₹249</p>
+      <button onclick="addToCart('Puja Thali', 249)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="fairy lights">
+      <div class="img"></div>
+      <h3>Fairy Lights</h3>
+      <p>Category: Home Decoration</p>
+      <p>Stock: Available</p>
+      <p class="price">₹179</p>
+      <button onclick="addToCart('Fairy Lights', 179)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="sweet box">
+      <div class="img"></div>
+      <h3>Sweet Box</h3>
+      <p>Category: Gift Item</p>
+      <p>Stock: Available</p>
+      <p class="price">₹399</p>
+      <button onclick="addToCart('Sweet Box', 399)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="festival toran">
+      <div class="img"></div>
+      <h3>Festival Toran</h3>
+      <p>Category: Entrance Decor</p>
+      <p>Stock: Available</p>
+      <p class="price">₹129</p>
+      <button onclick="addToCart('Festival Toran', 129)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="gift hamper">
+      <div class="img"></div>
+      <h3>Gift Hamper</h3>
+      <p>Category: Festive Combo</p>
+      <p>Stock: Available</p>
+      <p class="price">₹599</p>
+      <button onclick="addToCart('Gift Hamper', 599)">Add to Cart</button>
+    </div>
+  </div>
+</section>
+ 
+<section class="section" id="cart">
+  <div class="section-head">
+    <h2>Shopping Cart</h2>
+    <span class="mini-note">Your selected items</span>
+  </div>
+  <div class="cart-box">
+    <div class="cart-list">
+      <h3>Cart Items</h3>
+      <div id="cartItems">
+        <p style="color:#c8a830;font-family:Arial,sans-serif;font-size:14px;">No items added yet. Add products from above.</p>
+      </div>
+    </div>
+    <div class="cart-summary">
+      <h3>Order Summary</h3>
+      <p>Total Items: <strong id="totalItems">0</strong></p>
+      <p class="total">Total Amount: <span id="totalAmount">₹0</span></p>
+      <button onclick="placeOrder()">Proceed to Order</button>
+    </div>
+  </div>
+</section>
+ 
+<section class="section" id="profile">
+  <div class="section-head">
+    <h2>My Profile</h2>
+    <span class="mini-note">Manage your account details</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div>
+      <p style="font-size:13px;color:#8a6800;font-family:Arial,sans-serif;margin-bottom:4px;font-weight:bold;letter-spacing:0.5px;">NAME</p>
+      <input type="text" placeholder="Your Name" style="width:100%;padding:10px 12px;border:1.5px solid #d4a017;border-radius:8px;font-size:14px;font-family:Arial,sans-serif;background:#fffef5;outline:none;color:#2a1a00;"/>
+    </div>
+    <div>
+      <p style="font-size:13px;color:#8a6800;font-family:Arial,sans-serif;margin-bottom:4px;font-weight:bold;letter-spacing:0.5px;">EMAIL</p>
+      <input type="email" placeholder="email@example.com" style="width:100%;padding:10px 12px;border:1.5px solid #d4a017;border-radius:8px;font-size:14px;font-family:Arial,sans-serif;background:#fffef5;outline:none;color:#2a1a00;"/>
+    </div>
+    <div>
+      <p style="font-size:13px;color:#8a6800;font-family:Arial,sans-serif;margin-bottom:4px;font-weight:bold;letter-spacing:0.5px;">PHONE</p>
+      <input type="tel" placeholder="+91 00000 00000" style="width:100%;padding:10px 12px;border:1.5px solid #d4a017;border-radius:8px;font-size:14px;font-family:Arial,sans-serif;background:#fffef5;outline:none;color:#2a1a00;"/>
+    </div>
+    <div>
+      <p style="font-size:13px;color:#8a6800;font-family:Arial,sans-serif;margin-bottom:4px;font-weight:bold;letter-spacing:0.5px;">ADDRESS</p>
+      <input type="text" placeholder="Delivery Address" style="width:100%;padding:10px 12px;border:1.5px solid #d4a017;border-radius:8px;font-size:14px;font-family:Arial,sans-serif;background:#fffef5;outline:none;color:#2a1a00;"/>
+    </div>
+  </div>
+  <button onclick="alert('Profile saved!')" style="margin-top:18px;padding:11px 24px;border:1.5px solid #b8860b;background:linear-gradient(135deg,#f5c518,#d4a017);border-radius:8px;cursor:pointer;font-family:Arial,sans-serif;font-weight:bold;color:#1a1000;font-size:14px;">Save Profile</button>
+</section>
+ 
+<footer>
+  <strong>UTSAV</strong><br/>
+  <span style="font-size:13px;opacity:0.7;">© 2026 Utsav Festive Store. All rights reserved.</span>
+</footer>
+ 
+<script src="script.js"></script>
+</body>
+</html>
